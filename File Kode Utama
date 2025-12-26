@@ -34,3 +34,67 @@ st.markdown("### AI Market Analysis")
 if st.button("Analyze with AI"):
     ai_response = call_ai_gemini(pair, timeframe, ohlc_data)
     st.json(ai_response)
+
+import requests
+
+def call_ai_gemini(pair, timeframe, ohlc_data):
+    api_url = "https://api.gemini.com/your_ai_endpoint"  # ganti dengan endpoint AI Gemini
+    headers = {"Authorization": "Bearer YOUR_API_KEY", "Content-Type": "application/json"}
+    payload = {"pair": pair, "timeframe": timeframe, "data": ohlc_data}
+
+    response = requests.post(api_url, json=payload, headers=headers)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error": response.text}
+streamlit
+requests
+plotly
+pandas, 
+
+# AI Market Analysis Dashboard
+
+## Deskripsi
+Aplikasi Web AI Trading Dashboard untuk membantu trader melakukan analisis teknikal dengan bantuan AI Gemini.
+
+## Fitur
+- Dashboard interaktif
+- Chart candlestick (TradingView embed / Plotly)
+- Analisis AI Gemini (Bias, Alasan, Area Penting, Skenario, Risiko)
+- Pilihan pair & timeframe
+- Dummy data engine (bisa dihubungkan API real)
+- AI hanya sebagai asisten analisis, keputusan trading tetap di tangan trader
+
+## Cara Deploy
+1. Install library:
+
+2. Jalankan Streamlit:
+
+3. Deploy online (opsional):
+- Streamlit Cloud
+- PythonAnywhere / Render / Heroku
+
+## Lisensi
+Private / Proprietary (untuk testing pribadi). Bisa ganti MIT jika ingin share ke publik.
+
+[
+    {"time":"2025-12-26 10:00","open":1.100,"high":1.102,"low":1.099,"close":1.101},
+    {"time":"2025-12-26 10:15","open":1.101,"high":1.103,"low":1.100,"close":1.102},
+    {"time":"2025-12-26 10:30","open":1.102,"high":1.104,"low":1.101,"close":1.103}
+]
+
+import plotly.graph_objects as go
+
+def plot_candlestick(df):
+    fig = go.Figure(data=[go.Candlestick(
+        x=df['time'],
+        open=df['open'],
+        high=df['high'],
+        low=df['low'],
+        close=df['close']
+    )])
+    return fig
+
+def format_currency(value):
+    return f"${value:.4f}"
+
