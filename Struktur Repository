@@ -1,0 +1,17 @@
+ai_trading_dashboard/        <- root repository
+│
+├─ app.py                    <- Main Streamlit app
+├─ requirements.txt          <- Library yang dibutuhkan
+├─ README.md                 <- Deskripsi & cara pakai
+│
+├─ ai_agent/                 <- Folder integrasi AI Gemini
+│    └─ ai_call.py           <- Script panggil API AI Gemini
+│
+├─ chart/                    <- Folder chart / widget tambahan
+│    └─ candlestick.py       <- Contoh chart Plotly (opsional)
+│
+├─ data/                     <- Folder data sample / dummy
+│    └─ sample_ohlc.json     <- Contoh data OHLC
+│
+└─ utils/                    <- Folder helper / utilitas tambahan
+     └─ helpers.py           <- Fungsi tambahan opsional
