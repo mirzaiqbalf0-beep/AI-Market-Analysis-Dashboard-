@@ -1,0 +1,36 @@
+import streamlit as st
+import json
+from ai_agent.ai_call import call_ai_gemini
+
+st.set_page_config(page_title="AI Market Analysis Dashboard", layout="wide")
+
+# Sidebar
+st.sidebar.title("Settings")
+pair = st.sidebar.selectbox("Select Pair", ["EURUSD", "GBPUSD", "USDJPY"])
+timeframe = st.sidebar.selectbox("Select Timeframe", ["M15", "H1", "H4", "D1"])
+st.sidebar.markdown("---")
+st.sidebar.markdown("**Disclaimer:** AI hanya memberi analisis, keputusan trading tetap di tangan trader.")
+
+# Main area
+st.title("AI Market Analysis Dashboard")
+st.subheader(f"Pair: {pair} | Timeframe: {timeframe}")
+
+# Chart embed TradingView
+st.markdown("### Market Chart")
+chart_url = f"https://s.tradingview.com/widgetembed/?symbol=FX:{pair}&interval={timeframe}&hidesidetoolbar=1&theme=light"
+st.components.v1.iframe(chart_url, width=1000, height=600, scrolling=True)
+
+# Dummy OHLC data
+st.markdown("### Market Data (OHLC Sample)")
+ohlc_data = [
+    {"time":"2025-12-26 10:00","open":1.100,"high":1.102,"low":1.099,"close":1.101},
+    {"time":"2025-12-26 10:15","open":1.101,"high":1.103,"low":1.100,"close":1.102},
+    {"time":"2025-12-26 10:30","open":1.102,"high":1.104,"low":1.101,"close":1.103}
+]
+st.json(ohlc_data)
+
+# AI Analysis
+st.markdown("### AI Market Analysis")
+if st.button("Analyze with AI"):
+    ai_response = call_ai_gemini(pair, timeframe, ohlc_data)
+    st.json(ai_response)
